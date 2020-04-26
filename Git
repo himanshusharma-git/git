@@ -1,0 +1,728 @@
+											Git
+
+
+Stages in git
+                   git add                git commit                git push       
+unstaged/untracked--------->staged/tracked----------->commited state---------->Goes to remote repo.
+(when we create a file)
+
+After we commit the file from workspace it goes to local repository.
+
+commit id is also known as sha1sum and these are unique , never repeate.
+
+If you have make some changes and you have commit these changes too and now you want to go to the previous state you just have to checkout the previuos commit id.
+ex: git checkout 89898989(commit ID)
+
+
+There is new repository then add it to the local workspace and make changes ex.
+
+git remote add origin1 https://github.com/himanshusharma-git/test.git
+
+and then you can push your local repository changes to that remote repo.
+
+git push origin1
+
+
+you have add anyfile and now you want to delete it just run 
+git clean -f 
+only in unstaged just like rm -rf but if there are multiple files then its good.
+
+	
+
+
+
+#################################################################################################################################################################################################
+					TAG
+
+To make a tag just checkout to that commit id and run 
+git tag v0.1
+ 
+and if you just run the git tag without checking out to any commit id then it will tag the last commit with it.
+
+git tag <tagname> 
+
+git push origin <tagname> Push to remote
+
+To push multiple tags at single time 
+git push origin --tags <This will pull all pending tags to remote repository>
+
+To delete multiple tag at single time 
+
+git tag -d $(git tag -l)
+git tag v1.0 <log id> 	
+
+and if you have delete tag mistakenly from your local machine and want to retrive all tags we use "git fetch origin/origin1<remote origin>"
+
+
+To delete the tag from remote repository after deleting from your local "git push --delete origin <tagname>" / git push origin1 :v1.0
+
+
+###################################################################################################################################################################################################
+
+
+To check the log
+
+git log 
+git log --oneline (will provide you short detail)
+git log --author=himanshu (To see particular user log)
+git shortlog (very short log)
+
+If you have created a new branch and now you have make some changes to it but it will be in your local repo, you have to push it to your remote repo.
+git checkout release(your new branch)
+git push origin (here you will mention remote origin, origin/origin1,etc) release1(new branch name)
+
+
+To delete the new branch from local repo as well as remote repo.
+
+git branch -d or -D release1 (For local repo) then update it to the remote repo by running
+
+git push origin1 --delete release1 (Will delete the remote branch also)
+
+
+
+create a folder 
+install git
+git init
+git config --global user.name
+git config --global user.email
+git add filename
+git commit -m "commit message" filename or .
+git log
+
+git checkout <commit id> to make changes in file after commiting it , then again do git add and commit and then change to master branch.
+
+if by mistake you have commit something and need to go to previous change , then we do git checkout <file name> but if there are multiple files then you will do git checkout -f
+
+
+
+
+git revert <commit id> to revert the changes you have made .	
+
+
+
+git .ignore
+
+Branching 
+ 
+
+git checkout -b branchname <will create a new branch and checkout in same>
+git branch -a <will show all the branches even remote one>
+git branch -d branchname <to delete the branch>
+git branch -m newbranchname oldbranchname <to rename the branch>
+
+
+
+git pull and push 
+
+git remote add origin https://github.com/himanshusharma-git/AWS.git
+git remote -v 
+
+git pull origin master 
+	
+git push -u origin master 
+username:
+passwd:
+
+
+	
+
+
+
+
+
+Discard changes to file after commit you made some changes and now want to discard the changes.
+
+echo "make some changes in file" > filename 
+git status ( will show you modified stage )
+git checkout filename <will discard the changes>
+if there are more than 1 file and you want to discard all of them < git checkout . >
+
+
+If you have commited the changes and now want to revert the changes back to staging we do resetting
+git add .
+git commit -m "xxxxx" 
+git status <will get the clean directory>
+
+git log <can see the commit id there>
+
+
+git merge and rebase
+
+git reset <soft / mixed/ hard>
+
+
+after commited when we do 
+git reset --soft HEAD~1 <file comes to staging/index area "green" like after add stage>
+
+git reset --mixed HEAD~1 <file come to unstage area "Red" like before add stage>
+
+git reset --hard HEAD~1 <file deleted from every where even logs>
+
+
+
+git revert
+
+if you have commit the changes and already pushed to remote repository and now you want to get the previous change locally.
+you do git revert <log id>
+
+file1 himanshu added and committed 
+file1 himanshusharma added and comitted again 
+pushed , now you want the previous version himanshu one you do git revert.
+
+
+
+
+
+
+
+
+
+
+
+
+Cherry picking
+
+if you have 2 branches and you dont want to merge them but want one file in your master branch from another branch , you do cherry pick.
+
+
+master   >>>>>>>>>> development <file1>
+you need file1 from development branch.
+
+
+copy the commit id from development branch and go to master branch and run
+
+git cherry-pick <commitid>
+
+you will get that particular file in your master branch 
+
+#############################################################################################################################################################################################################
+
+Git stash 
+
+Stash only work with the staged file {git add . }
+when you are in working directory and need to do something else but cant commit the changes , you do stashing.
+
+git stash 
+git stash list list all the stash.
+git stash show <stash Id> show all the content of stash.
+git stash pop <stash Id> it will come in previous state as well as delete the stash.
+git stash drop <stash Id> it will delete the stash.
+git stash apply <stash id> it wont delete the stash it will just come in previous state.
+
+#############################################################################################################################################################################################################
+
+to change the commit message before pushing it to remote repository.
+
+git commit --amend <make changes and save it>
+
+	
+ 
+
+git blame = to check who mafe the modofication to the file.
+git blame <filename>
+
+ 
+
+
+INTERVIEW QUESTIONS
+
+
+ What is the difference between Git and SVN?
+
+		Git								SVN
+1. Git is a Decentralized Version Control tool			1. SVN is a  Centralized Version Control tool
+2. It belongs to the 3rd generation of Version Control tools	2. It belongs to the 2nd generation of Version Control tools
+3. Clients can clone entire repositories on their local systems	3. Version history is stored on a server-side repository
+4. Commits are possible even if offline				4. Only online commits are allowed
+5. Push/pull operations are faster				5. Push/pull operations are slower
+6. Works are shared automatically by commit			6. Nothing is shared automatically
+
+
+ 1) What is Git?
+-- Git is a Distributed Version Control system (DVCS). It can track changes to a file and allows you to revert back to any particular change.
+
+-- Its distributed architecture provides many advantages over other Version Control Systems (VCS) like SVN one major advantage is that it does not rely on a central server to store all the versions of a project’s files.
+
+-- Instead, every developer “clones” a copy of a repository I have shown in the diagram with “Local repository” and has the full history of the project on his hard drive so when there is a server outage all you need for recovery is one of your teammate’s local Git repository.
+
+
+-- There is a central cloud repository as well where developers can commit changes and share it with other teammates as you can see in the diagram where all collaborators are commiting changes “Remote repository”. 
+
+
+2) What is the command to write a commit message in Git?
+
+Answer to this is pretty straightforward.
+
+Command that is used to write a commit message is “git commit -a”.
+
+Now explain about -a flag by saying -a on the command line instructs git to commit the new content of all tracked files that have been modified. Also mention you can use “git add<file>” before git commit -a if new files need to be committed for the first time.
+
+
+What is ‘bare repository’ in Git?
+
+You are expected to tell the difference between a “working directory” and “bare repository”.
+
+A “bare” repository in Git just contains the version control information and no working files (no tree) and it doesn’t contain the special .git sub-directory. Instead, it contains all the contents of the .git sub-directory directly in the main directory itself, where as working directory consist of:  
+
+A .git subdirectory with all the Git related revision history of your repo.
+A working tree, or checked out copies of your project files.
+
+
+What language is used in Git?
+
+Instead of just telling the name of the language, you need to tell the reason for using it as well. I will suggest you to answer this by saying:
+
+Git uses ‘C’ language. GIT is fast, and ‘C’ language makes this possible by reducing the overhead of run times associated with high level languages.
+
+
+In Git how do you revert a commit that has already been pushed and made public?
+
+There can be two answers to this question and make sure that you include both because any of the below options can be used depending on the situation:
+
+Remove or fix the bad file in a new commit and push it to the remote repository. This is the most natural way to fix an error. Once you have made necessary changes to the file, commit it to the remote repository for that I will use
+git commit -m “commit message” 
+Create a new commit that undoes all changes that were made in the bad commit.to do this I will use a command
+git revert <name of bad commit>
+
+
+ What is the difference between git pull and git fetch?
+
+Git pull command pulls new changes or commits from a particular branch from your central repository and updates your target branch in your local repository.
+
+Git fetch is also used for the same purpose but it works in a slightly different way. When you perform a git fetch, it pulls all new commits from the desired branch and stores it in a new branch in your local repository. If you want to reflect these changes in your target branch, git fetch must be followed with a git merge. Your target branch will only be updated after merging the target branch and fetched branch. Just to make it easy for you, remember the equation below:
+
+Git pull = git fetch + git merge
+
+
+ What is Git stash?
+
+According to me you should first explain the need for Git stash.
+
+Often, when you’ve been working on part of your project, things are in a messy state and you want to switch branches for sometime to work on something else. The problem is, you don’t want to do a commit of half-done work just so you can get back to this point later. The answer to this issue is Git stash.
+
+Now explain what is Git stash. 
+
+Stashing takes your working directory that is, your modified tracked files and staged changes and saves it on a stack of unfinished changes that you can reapply at any time.
+
+
+
+What is Git stash drop?
+
+Begin this answer by saying for what purpose we use Git ‘stash drop’.
+
+Git ‘stash drop’ command is used to remove the stashed item. It will remove the last added stash item by default, and it can also remove a specific item if you include it as an argument.
+
+Now give an example.
+
+If you want to remove a particular stash item from the list of stashed items you can use the below commands:
+
+git stash list: It will display the list of stashed items like:
+stash@{0}: WIP on master: 049d078 added the index file
+stash@{1}: WIP on master: c264051 Revert “added file_size”
+stash@{2}: WIP on master: 21d80a5 added number to log
+
+If you want to remove an item named stash@{0} use command git stash drop stash@{0}.
+
+
+
+
+How do you find a list of files that has changed in a particular commit?
+For this answer instead of just telling the command, explain what exactly this command will do.
+
+To get a list files that has changed in a particular commit use the below command:
+
+git diff-tree -r {hash}
+
+Given the commit hash, this will list all the files that were changed or added in that commit. The -r flag makes the command list individual files, rather than collapsing them into root directory names only.
+
+You can also include the below mentioned point, although it is totally optional but will help in impressing the interviewer.
+
+The output will also include some extra information, which can be easily suppressed by including two flags:
+
+git diff-tree –no-commit-id –name-only -r {hash}
+
+Here –no-commit-id will suppress the commit hashes from appearing in the output, and –name-only will only print the file names, instead of their paths.
+
+
+What is the function of ‘git config’?
+
+First tell why we need ‘git config‘. 
+
+Git uses your username to associate commits with an identity. The git config command can be used to change your Git configuration, including your username.
+
+Now explain with an example.
+
+Suppose you want to give a username and email id to associate commit with an identity so that you can know who has made a particular commit. For that I will use:
+
+git config –global user.name “Your Name”: This command will add username.
+git config –global user.email “Your E-mail Address”: This command will add email id.
+
+
+What does commit object contains?
+
+
+
+Commit object contains the following components, you should mention all the three points present below:
+
+A set of files, representing the state of a project at a given point of time
+Reference to parent commit objects
+An SHAI name, a 40 character string that uniquely identifies the commit object.
+
+
+
+How can you create a repository in Git?
+
+
+This is probably the most frequently asked questions and answer to this is really simple.
+
+To create a repository, create a directory for the project if it does not exist, then run command “git init”. By running this command .git directory will be created in the project directory.
+
+
+
+
+How do you squash last N commits into a single commit?
+
+There are two options to squash last N commits into a single commit include both of the below mentioned options in your answer:
+
+If you want to write the new commit message from scratch use the following command
+git reset –soft HEAD~N &&
+git commit
+If you want to start editing the new commit message with a concatenation of the existing commit messages then you need to extract those messages and pass them to Git commit for that I will use
+git reset –soft HEAD~N &&
+git commit –edit -m”$(git log –format=%B –reverse .HEAD@{N})”
+
+
+
+
+ What is Git bisect? How can you use it to determine the source of a (regression) bug?
+
+I will suggest you to first give a small definition of Git bisect.
+
+Git bisect is used to find the commit that introduced a bug by using binary search. Command for Git bisect is
+git bisect <subcommand> <options>
+
+Now since you have mentioned the command above explain them what this command will do.
+
+This command uses a binary search algorithm to find which commit in your project’s history introduced a bug. You use it by first telling it a “bad” commit that is known to contain the bug, and a “good” commit that is known to be before the bug was introduced. Then Git bisect picks a commit between those two endpoints and asks you whether the selected commit is “good” or “bad”. It continues narrowing down the range until it finds the exact commit that introduced the change.
+
+
+Describe branching strategies you have used?
+
+This question is asked to test your branching experience with Git so, tell them about how you have used branching in your previous job and what purpose does it serves, you can refer the below mention points:
+
+Feature branching
+A feature branch model keeps all of the changes for a particular feature inside of a branch. When the feature is fully tested and validated by automated tests, the branch is then merged into master.
+Task branching
+In this model each task is implemented on its own branch with the task key included in the branch name. It is easy to see which code implements which task, just look for the task key in the branch name.
+Release branching
+Once the develop branch has acquired enough features for a release, you can clone that branch to form a Release branch. Creating this branch starts the next release cycle, so no new features can be added after this point, only bug fixes, documentation generation, and other release-oriented tasks should go in this branch. Once it is ready to ship, the release gets merged into master and tagged with a version number. In addition, it should be merged back into develop branch, which may have progressed since the release was initiated.
+In the end tell them that branching strategies varies from one organization to another so I know basic branching operations like delete, merge, checking out a branch etc..
+
+
+
+How will you know in Git if a branch has already been merged into master?
+
+The answer is pretty direct.
+
+To know if a branch has been merged into master or not you can use the below commands:
+
+git branch –merged It lists the branches that have been merged into the current branch.
+git branch –no-merged It lists the branches that have not been merged.
+
+
+
+What is Git rebase and how can it be used to resolve conflicts in a feature branch before merge?
+
+According to me you should start by saying git rebase is a command which will merge another branch into the branch where you are currently working, and move all of the local commits that are ahead of the rebased branch to the top of the history on that branch.
+
+Now, once you have defined Git rebase time for an example to show how it can be used to resolve conflicts in a feature branch before merge.
+
+If a feature branch was created from the master, and since then the master branch has received new commits, Git rebase can be used to move the feature branch to the tip of master. The command effectively will replay the changes made in the feature branch at the tip of master, allowing conflicts to be resolved in the process. When done with care, this will allow the feature branch to be merged into master with relative ease and sometimes as a simple fast-forward operation.
+
+
+
+What is SubGit?Begin this answer by explaining what is SubGit used for.
+
+SubGit is a tool for SVN to Git migration. It creates a writable Git mirror of a local or remote Subversion repository and uses both Subversion and Git as long as you like.
+
+Now you can include some advantages like you can do a fast one-time import from Subversion to Git or use SubGit within Atlassian Bitbucket Server.We can use SubGit to create a bi-directional Git-SVN mirror of existing Subversion repository. You can push to Git or commit to Subversion at your convenience. Synchronization will be done by SubGit.
+
+
+
+  What are the advantages of using GIT?
+
+a)      Data redundancy and replication
+
+b)      High availability
+
+c)       Only one.git directory per repository
+
+d)      Superior disk utilization and network performance
+
+e)      Collaboration friendly
+
+f)       Any sort of projects can use GIT
+
+
+
+
+
+ What is the function of ‘GIT PUSH’ in GIT?
+
+‘GIT PUSH’ updates remote refs along with associated objects.
+
+
+
+
+
+  Why GIT better than Subversion?
+
+GIT is an open source version control system; it will allow you to run ‘versions’ of a project, which show the changes that were made to the code overtime also it allows you keep the backtrack if necessary and undo those changes.  Multiple developers can checkout, and upload changes and each change can then be attributed to a specific developer.
+
+
+
+ What is “Staging Area” or “Index” in GIT?
+
+	Before completing the commits, it can be formatted and reviewed in an intermediate area known as ‘Staging Area’ or ‘Index’.
+
+
+
+
+What is the function of git clone?
+
+The git clone command creates a copy of an existing Git repository.  To get the copy of a central repository, ‘cloning’  is the most common way used by programmers.
+
+
+
+ What is ‘head’ in git and how many heads can be created in a repository?
+
+A ‘head’ is simply a reference to a commit object. In every repository, there is a default head referred as “Master”.  A repository can contain any number of heads.
+
+
+
+ What is the purpose of branching in GIT?
+
+The purpose of branching in GIT is that you can create your own branch and jump between those branches. It will allow you to go to your previous work keeping your recent work intact.
+
+
+
+What is the common branching pattern in GIT?
+
+The common way of creating branch in GIT is to maintain one as “Main“
+
+branch and create another branch to implement new features. This pattern is particularly useful when there are multiple developers working on a single project.
+
+ How can you bring a new feature in the main branch?
+
+To bring a new feature in the main branch, you can use a command “git merge” or “git pull command”.
+
+
+
+What is a ‘conflict’ in git?
+
+A ‘conflict’ arises when the commit that has to be merged has some change in one place, and the current commit also has a change at the same place. Git will not be able to predict which change should take precedence.
+
+
+
+ How can conflict in git resolved?
+
+To resolve the conflict in git, edit the files to fix the conflicting changes and then add the resolved files by running “git add” after that to commit the repaired merge,  run “git commit”.  Git remembers that you are in the middle of a merger, so it sets the parents of the commit correctly.
+
+
+To delete a branch what is the command that is used?
+
+Once your development branch is merged into the main branch, you don’t need
+
+development branch.  To delete a branch use, the command “git branch –d [head]”.
+
+
+
+What is another option for merging in git?
+
+“Rebasing” is an alternative to merging in git.
+
+
+
+
+What is the syntax for “Rebasing” in Git?
+
+The syntax used for rebase is “git rebase [new-commit] “
+
+
+
+
+What is the difference between ‘git remote’ and ‘git clone’?
+
+‘git remote add’  just creates an entry in your git config that specifies a name for a particular URL.  While, ‘git clone’ creates a new git repository by copying and existing one located at the URI.
+
+
+What is GIT version control?
+
+With the help of GIT version control, you can track the history of a collection of files and includes the functionality to revert the collection of files to another version.  Each version captures a snapshot of the file system at a certain point of time. A collection of files and their complete history are stored in a repository.
+
+Mention some of the best graphical GIT client for LINUX?
+
+Some of the best GIT client for LINUX is
+
+a)      Git Cola
+
+b)      Git-g
+
+c)       Smart git
+
+d)      Giggle
+
+e)      Git GUI
+
+f)       qGit
+
+
+What is the function of ‘git diff ’ in git?
+
+‘git diff ’ shows the changes between commits, commit and working tree etc.
+
+
+
+What is ‘git status’ is used for?
+
+As ‘Git Status’ shows you the difference between the working directory and the index, it is helpful in understanding a git more comprehensively.
+
+
+
+
+ What is the difference between the ‘git diff ’and ‘git status’?
+
+‘git diff’ is similar to ‘git status’, but it shows the differences between various commits and also between the working directory and index.
+
+
+
+
+What is the function of ‘git checkout’ in git?
+
+A ‘git checkout’ command is used to update directories or specific files in your working tree with those from another branch without merging it in the whole branch.
+
+
+
+
+What is the function of ‘git rm’?
+
+To remove the file from the staging area and also off your disk ‘git rm’ is used.
+
+
+
+What is the function of ‘git stash apply’?
+
+When you want to continue working where you have left your work, ‘git stash apply’ command is used to bring back the saved changes onto the working directory.
+
+
+
+ What is the use of ‘git log’?
+
+To find specific commits in your project history- by author, date, content or history ‘git log’ is used.
+
+
+
+What is ‘git add’ is used for?
+
+‘git add’ adds file changes in your existing directory to your index.
+
+
+
+What is the function of ‘git reset’?
+The function of ‘Git Reset’ is to reset your index as well as the working directory to the state of your last commit.
+
+
+
+What is git Is-tree?
+
+
+‘git Is-tree’ represents a tree object including the mode and the name of each item and the SHA-1 value of the blob or the tree.
+
+
+
+How git instaweb is used?
+
+‘Git Instaweb’ automatically directs a web browser and runs webserver with an interface into your local repository.
+
+
+
+What does ‘hooks’ consist of in git?
+
+This directory consists of Shell scripts which are activated after running the corresponding Git commands.  For example, git will try to execute the post-commit script after you run a commit.
+
+
+
+Explain what is commit message?
+
+
+
+Commit message is a feature of git which appears when you commit a change. Git provides you a text editor where you can enter the modifications made in commits.
+
+
+
+How can you fix a broken commit?
+
+To fix any broken commit, you will use the command “git commit—amend”. By running this command, you can fix the broken commit message in the editor.
+
+
+
+Why is it advisable to create an additional commit rather than amending an existing commit?
+
+There are couple of reason
+
+a)      The amend operation will destroy the state that was previously saved in a commit.  If it’s just the commit message being changed then that’s not an issue.  But if the contents are being amended then chances of eliminating something important remains more.
+
+b)      Abusing “git commit- amend” can cause a small commit to grow and acquire unrelated changes.
+
+
+
+
+
+Name a few Git repository hosting services
+
+Pikacode
+Visual Studio Online  
+GitHub
+GitEnterprise
+SourceForge.net
+
+
+To tag a particular file after commiting it ...
+git log <take the log id of that commit >
+
+
+
+by this you can tag any commit later also if you missed it
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
